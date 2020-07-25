@@ -38,6 +38,7 @@ class UserController {
   async select(req: Request, res: Response) {
     try {
       const { id } = req.params
+
       const user = await getRepository(User)
         .createQueryBuilder('u')
         .where('u.id = :id', { id })
@@ -75,6 +76,7 @@ class UserController {
   async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body
+      console.log(req.body)
       const result = await getRepository(User)
         .createQueryBuilder('u')
         .where('u.email = :email', { email })
