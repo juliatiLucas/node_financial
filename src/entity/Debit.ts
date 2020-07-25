@@ -6,6 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm'
 import User from './User'
+import Category from './Category'
 
 @Entity()
 class Debit {
@@ -23,6 +24,9 @@ class Debit {
 
   @ManyToOne(() => User, (user) => user.debits, { cascade: true })
   user!: User
+
+  @ManyToOne(() => Category, (category) => category.debits)
+  category!: Category
 }
 
 export default Debit

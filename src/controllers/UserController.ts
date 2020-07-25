@@ -1,4 +1,5 @@
 import User from '../entity/User'
+import Category from '../entity/Category'
 import { getRepository } from 'typeorm'
 import { Request, Response } from 'express'
 
@@ -13,6 +14,21 @@ class UserController {
         limit: 0,
         balance: 0,
       })
+
+      await getRepository(Category).save([
+        {
+          name: 'Casa',
+          user: user,
+        },
+        {
+          name: 'Lazer',
+          user: user,
+        },
+        {
+          name: 'Compras',
+          user: user,
+        },
+      ])
       return res.status(201).json(user)
     } catch (err) {
       return res.status(400).json(err)
@@ -71,6 +87,6 @@ class UserController {
       res.status(400).json(err)
     }
   }
-} 
+}
 
 export default new UserController()

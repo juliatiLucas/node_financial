@@ -5,10 +5,11 @@ import { Response, Request } from 'express'
 class DebitController {
   async insert(req: Request, res: Response) {
     try {
-      const { description, value, user } = req.body
+      const { description, value, user, category } = req.body
       const debit = await getRepository(Debit).save({
         description,
         value,
+        category,
         user,
       })
       res.status(201).json(debit)
@@ -19,10 +20,11 @@ class DebitController {
 
   async getDebitsByUser(req: Request, res: Response) {
     try {
-      const { userId } = req.params
+      const { user } = req.params
       const debits = await getRepository(Debit)
         .createQueryBuilder('d')
-        .where('d.user = :userId', { userId })
+        .where('d.user = :user', { user })
+        .leftJoinAndSelect('d.category', 'category')
         .getMany()
       return res.status(200).json(debits)
     } catch (err) {
