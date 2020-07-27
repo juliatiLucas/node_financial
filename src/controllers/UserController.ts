@@ -76,13 +76,12 @@ class UserController {
   async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body
-      console.log(req.body)
+
       const result = await getRepository(User)
         .createQueryBuilder('u')
         .where('u.email = :email', { email })
-        .where('u.password = :password', { password })
+        .andWhere('u.password = :password', { password })
         .getOne()
-
       if (result) res.status(200).json(result)
       else res.status(400).send()
     } catch (err) {
