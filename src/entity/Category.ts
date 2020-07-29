@@ -16,6 +16,9 @@ class Category {
   @Column()
   name!: string
 
+  @Column({ nullable: true, default: '2cab7f' })
+  color!: string
+
   @ManyToOne(() => User, (user) => user.categories)
   user!: User
 

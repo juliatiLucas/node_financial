@@ -10,14 +10,11 @@ router.get('/users/:id', userController.select)
 router.put('/users/:id', userController.update)
 router.get('/users/:user/debits', debitController.getDebitsByUser)
 router.get('/users/:user/categories', categoryController.select)
-router.get('/users/:user/categories/group', categoryController.group)
+router.get('/users/:user/categories/:category/debits', categoryController.debits)
 router.delete('/users/:user/categories/:id', categoryController.delete)
 router.post('/users/:user/categories', categoryController.insert)
 
 router.post('/debits', debitController.insert)
 router.get('/debits/:id', debitController.delete)
-
-
-
 
 export default router
