@@ -21,9 +21,10 @@ class CategoryController {
   async select(req: Request, res: Response) {
     try {
       const { user } = req.params
-      const categories = await getRepository(Category)
+      const categories: Category[] = await getRepository(Category)
         .createQueryBuilder('c')
         .where('c.user = :user', { user })
+        .leftJoinAndSelect('c.debits', 'debits')
         .getMany()
       return res.status(200).json(categories)
     } catch (err) {
