@@ -15,6 +15,6 @@ router.delete('/users/:user/categories/:id', categoryController.delete)
 router.post('/users/:user/categories', categoryController.insert)
 
 router.post('/debits', debitController.insert)
-router.get('/debits/:id', debitController.delete)
+router.delete('/debits/:id', debitController.delete)
 
 export default router
