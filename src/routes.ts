@@ -12,6 +12,7 @@ router.get('/users/:user/debits', debitController.getDebitsByUser)
 router.get('/users/:user/categories', categoryController.select)
 router.get('/users/:user/categories/:category/debits', categoryController.debits)
 router.delete('/users/:user/categories/:id', categoryController.delete)
+router.put('/users/:user/categories/:id', categoryController.update)
 router.post('/users/:user/categories', categoryController.insert)
 
 router.post('/debits', debitController.insert)

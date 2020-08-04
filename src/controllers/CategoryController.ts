@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm'
+import { getRepository, getConnection } from 'typeorm'
 import Category from '../entity/Category'
 import { Request, Response } from 'express'
 import Debit from '../entity/Debit'
@@ -27,6 +27,23 @@ class CategoryController {
         .leftJoinAndSelect('c.debits', 'debits')
         .getMany()
       return res.status(200).json(categories)
+    } catch (err) {
+      return res.status(400).json(err)
+    }
+  }
+
+  async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+      const { name } = req.body
+
+      getConnection()
+        .createQueryBuilder()
+        .update(Category)
+        .set({ name: name })
+        .where('id = :id', { id })
+        .execute()
+      return res.status(200).json()
     } catch (err) {
       return res.status(400).json(err)
     }
