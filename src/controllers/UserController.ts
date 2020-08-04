@@ -58,8 +58,8 @@ class UserController {
         .getOne()
       const name = req.body.name ?? userDefault?.name
       const password = req.body.password ?? userDefault?.password
-      const balance = req.body.balance ?? userDefault?.name
-      const limit = req.body.limit ?? userDefault?.name
+      const balance = req.body.balance ?? userDefault?.balance
+      const limit = req.body.limit ?? userDefault?.limit
       const user = await getRepository(User).update(id, {
         name,
         password,
