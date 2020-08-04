@@ -22,7 +22,7 @@ class Category {
   @ManyToOne(() => User, (user) => user.categories)
   user!: User
 
-  @OneToMany(() => Debit, (debit) => debit.category)
+  @OneToMany(() => Debit, (debit) => debit.category, {onDelete: 'SET NULL'})
   debits!: Debit[]
 }
 
